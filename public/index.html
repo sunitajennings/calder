@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calder</title>
+    <link rel="stylesheet" href="styles/demo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto+Mono:wght@100;300;400;500&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <h1>"userless" mxconnect</h1>
+    <p class="subtitle">Goal: create a version of MXconnect that does not rely on user creation to run. A “once and
+        done” Connect that does not have continual knowledge of a user.</p>
+    <p class="subtitle">As a fintech developer, I want to verify an account and retrieve its account + routing number
+        without creating persistent objects in the MX ecosystem.</p>
+
+    <a href="/apiflow/institutions">Option 1: Using the MX Platform API</a>
+    <pre>GET  /institutions, filter for institution.supports_account_verification : true        
+GET  /institutions/{institution_code}/credentials
+POST /users
+POST /users/{user_guid}/members with skip_aggregation : true
+POST /users/{user_guid}/members/{member_guid}/verify
+GET  /users/{user_guid}/members/{member_guid}/status
+GET  /users/{user_guid}/members/{member_guid}/challenges (for account selection)
+PUT  /users/{user_guid}/members/{member_guid}/resume
+GET  /users/{user_guid}/members/{member_guid}/status
+GET  /users/{user_guid}/members/{member_guid}/account_numbers
+</pre>
+</body>
+
+</html>

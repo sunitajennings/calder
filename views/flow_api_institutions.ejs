@@ -1,0 +1,27 @@
+<%- include('fragments/header.ejs') %>
+
+<h2 class="title_api"><%= requestparams.steps[0] %></h1>
+<% if (requestparams.institutions == null || requestparams.institutions.length==0) { %> 
+    <section>
+        <p> None found </p>
+    </section>
+<% } else { 
+    let institutions = requestparams.institutions %>
+    <form id="institution_form" name="institution_form" method="get" class="form-aligned">
+        <div class="form-column">
+            <label for="clientId">The user's client id: (optional) </label>
+            <label for="selectedInstitution">Which institution would you like to connect to? </label>
+        </div>
+        <div class="form-column">
+            <input type="text" name="clientId" id="clientId" size=20></input>
+            <select name="selectedInstitution" id="selectedInstitution" onchange="postFormTo('institution_form', '/apiflow/institutioncredentials', '', '');">
+                <option value="none selected">Select One</option>
+            <% for (let i=0; i< institutions.length; i++) { %>
+                <option value="<%= institutions[i].code %>"><%= institutions[i].name %></option>
+            <% } %>
+            </select>
+        </div>
+    </form>
+<% } %>
+
+<%- include('fragments/footer.ejs') %>

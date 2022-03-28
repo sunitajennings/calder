@@ -1,0 +1,17 @@
+
+    <script>
+    function postFormTo(form_id, endpoint, hiddenInputName, hiddenInputValue) {
+        let myform = document.getElementById(form_id)
+        console.log("Form elements: "+myform.elements.length)
+        let input = document.createElement("input")
+        input.setAttribute("type", "hidden")
+        input.setAttribute("name", hiddenInputName)
+        input.setAttribute("value", hiddenInputValue)
+        myform.appendChild(input)
+        myform.action=endpoint; 
+        myform.submit();
+    }
+    </script>
+</body>
+
+</html>

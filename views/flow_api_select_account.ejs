@@ -1,0 +1,14 @@
+<%- include('fragments/header.ejs') %>
+
+<% 
+   let i = 0
+   for (i=0; i<requestparams.steps.length-1; i++) { %>
+    <h2 class="title_api title_api_completed"><%= requestparams.steps[i] %></h1>    
+<% } %>
+<section>
+<h2 class="title_api"><%= requestparams.steps[i] %></h1>
+
+
+</section>
+
+<%- include('fragments/footer.ejs') %>

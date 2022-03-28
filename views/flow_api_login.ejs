@@ -1,0 +1,40 @@
+<%- include('fragments/header.ejs') %>
+
+<% 
+   let i = 0
+   for (i=0; i<requestparams.steps.length-1; i++) { %>
+    <h2 class="title_api title_api_completed"><%= requestparams.steps[i] %></h1>    
+<% } %>
+<section>
+<h2 class="title_api"><%= requestparams.steps[i] %></h1>
+<% if (requestparams.selectedInstitution == null) { %> 
+    <p> No institution selected </p>
+<% } else { %>
+    <form id="institution_form" name="institution_form" class="form-flow" method="post" action="/apiflow/institutions/<%= requestparams.selectedInstitution.code %>/connect">
+        <p>
+        <% if (requestparams.clientId) { %>
+            <input type="hidden" name="clientId" id="clientId" value="<%= requestparams.clientId %>"/>
+            <%= requestparams.clientId %>
+        <% } else { %> 
+            anonymous user
+        <% } %> connecting to <%= requestparams.selectedInstitution.name %></p>
+        <input type="hidden" name="selectedInstitution" id="selectedInstitution" value="<%= requestparams.selectedInstitution %>"/>
+        <div class="form-aligned">
+            <img src="<%= requestparams.selectedInstitution.small_logo_url %>" />
+            <div class="form-column">
+                <label for="userId"><%= requestparams.credentials[0].label %></label>
+                <label for="password"><%= requestparams.credentials[1].label %></label>
+            </div>
+            <div class="form-column">
+                <input type="hidden" name="credentials_0_guid" id="credentials_0_guid" value="<%= requestparams.credentials[0].guid %>"/>
+                <input type="text" name="credentials_0_value" id="credentials_0_value" size=20/>
+                <input type="hidden" name="credentials_1_guid" id="credentials_1_guid" value="<%= requestparams.credentials[1].guid %>"/>
+                <input type="password" name="credentials_1_value" id="credentials_1_value" size=20/>
+            </div>
+        </div>
+        <input type="submit" value="Login"/>
+    </form>
+<% } %>
+</section>
+
+<%- include('fragments/footer.ejs') %>
